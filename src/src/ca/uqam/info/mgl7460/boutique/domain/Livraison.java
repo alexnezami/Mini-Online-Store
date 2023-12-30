@@ -1,4 +1,4 @@
-package boutique.domain;
+package domain;
 
 import java.util.Calendar;
 import java.util.Iterator;

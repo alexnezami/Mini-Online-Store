@@ -6,11 +6,12 @@ import java.util.List;
 
 import domain.Adresse;
 import domain.Client;
-import Commande;
-import Facture;
-import LigneCommande;
-import Livraison;
-import Produit;
+import domain.Commande;
+import domain.Facture;
+import domain.LigneCommande;
+import domain.Livraison;
+import domain.Panier;
+import domain.Produit;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,15 @@ public class CommandeImpl implements Commande {
     private List<LigneCommande> lignesCommandes = new ArrayList<>();
     private List<Livraison> livraisons = new ArrayList<>();
     private Facture facture;
+
+    public CommandeImpl(Client client, Calendar dateCommande, String numeroCommande) {
+        this.client = client;
+        this.dateCommande = dateCommande;
+        this.numeroCommande = numeroCommande;
+        this.adresseDeLivraison = client.getAdresse();
+        this.lignesCommandes = new ArrayList<>();
+        this.livraisons = new ArrayList<>();
+    }
 
     @Override
     public Client getClient() {
@@ -59,7 +69,7 @@ public class CommandeImpl implements Commande {
         for (LigneCommande ligne : lignesCommandes) {
             // si on trouve le produit mentionné dans LigneCommande on le retourne 
             // sinon on retourne zéro 
-            if (this.ligne.getProduit().equals(produit)) {
+            if (ligne.getProduit().equals(produit)) {
                 return ligne.getQuantite();
             }
         }
@@ -68,7 +78,7 @@ public class CommandeImpl implements Commande {
 
     @Override
     public void ajouteLigneCommande(Produit produit, int quantite) {
-        this.lignesCommandes.add(new LigneCommandeImpl(produit, quantite));
+        lignesCommandes.add(new LigneCommandeImpl(produit, quantite));
     }
 
     @Override

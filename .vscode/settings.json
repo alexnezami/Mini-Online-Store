@@ -1,6 +1,9 @@
 {
     "java.project.sourcePaths": [
-        //"src/src",
-        "src\\ca\\uqam\\info\\mgl7460\\boutique"
+        "src\\src\\ca\\uqam\\info\\mgl7460\\boutique"
+    ],
+    "java.project.outputPath": "src\\src\\ca\\uqam\\info\\mgl7460\\boutique\\bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
     ]
 }

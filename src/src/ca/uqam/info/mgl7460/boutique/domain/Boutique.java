@@ -1,6 +1,6 @@
-package ca.uqam.info.mgl7460.boutique.domain;
+package domain;
 
-import ca.uqam.info.mgl7460.boutique.implementation.BoutiqueImpl;
+import implementation.BoutiqueImpl;
 
 public interface Boutique {
 

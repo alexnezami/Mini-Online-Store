@@ -1,4 +1,4 @@
-package ca.uqam.info.mgl7460.boutique.domain;
+package domain;
 
 public enum Condition {
     GOOD, DAMAGED, BROKEN
