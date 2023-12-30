@@ -3,39 +3,42 @@ package implementation;
 import domain.LigneCommande;
 import domain.Produit;
 
-public class LigneCommandeImpl implements LigneCommande{
+public class LigneCommandeImpl implements LigneCommande {
 
-    public LigneCommandeImpl(Produit produit, int quantite) {
+    Produit produit;
+    int quantite;
+    float prixUnitaire;
+
+    public LigneCommandeImpl(Produit produit, int quantite, float prixUnitaire) {
+        this.produit = produit;
+        this.quantite = quantite;
+        this.prixUnitaire = prixUnitaire;
     }
+
 
     @Override
     public Produit getProduit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProduit'");
+        return this.produit;
     }
 
     @Override
     public int getQuantite() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getQuantite'");
+        return this.quantite;
     }
 
     @Override
     public void modifierQuantite(int quantite) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modifierQuantite'");
+        this.quantite = quantite;
     }
 
     @Override
     public float getPrixUnitaire() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrixUnitaire'");
+        return this.prixUnitaire;
     }
 
     @Override
     public void setPrixUnitaire(float prix) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPrixUnitaire'");
+        this.prixUnitaire = prix;
     }
-    
+
 }

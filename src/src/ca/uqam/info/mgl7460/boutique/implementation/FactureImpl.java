@@ -1,82 +1,118 @@
 package implementation;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import domain.Client;
 import domain.Commande;
 import domain.Facture;
 import domain.Paiement;
 import domain.Produit;
+import domain.FabriqueBoutique;
 
-public class FactureImpl implements Facture{
+public class FactureImpl implements Facture {
+    private Calendar date;
+    private Commande commande;
+    private float reductionGlobale;
+    private float montant;
+    private float balance;
+    private List<LigneFacture> lignesFacture;
+    private List<Paiement> paiements;
+    private FabriqueBoutique fabriqueBoutique;
 
-    public FactureImpl(CommandeImpl commandeImpl) {
+    public FactureImpl(Calendar date,Commande commande, float reductionGlobale,
+    float montant, float balance) {
+        this.date = date;
+        this.commande = commande;
+        this.reductionGlobale = reductionGlobale;
+        this.montant = montant;
+        this.balance = balance;
+        this.lignesFacture = new ArrayList<>();
+        this.paiements = new ArrayList<>();
+    }
+
+    public Calendar getDate(){
+        return this.date;
     }
 
     @Override
     public Commande getCommande() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCommande'");
+        return commande;
     }
 
     @Override
     public float getMontant() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMontant'");
+        return this.montant;
     }
 
     @Override
     public float getBalance() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBalance'");
+        // on va recevoir liste de paiement et apres les montant
+        float totalPayments = paiements.stream().map(Paiement::getMontant)
+        // On additionne tous les montants ensemble
+        .reduce(0.0f, Float::sum);
+        this.balance = getMontant() - totalPayments;
+        // avec cette method on va eviter d'utiliser loop comme for
+        // et aussi les codes sont plus lisible
+        return this.balance; 
     }
 
     @Override
-    public Paiement ajouterPaiement(float amount, Client payeur) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ajouterPaiement'");
+    public Paiement ajouterPaiement(float amount, Client payeur){
+       
+        Paiement paiement = fabriqueBoutique.creerPaiement(this, payeur, amount);
+        this.paiements.add(paiement);
+        return paiement;
+   
     }
+
 
     @Override
     public Iterator<LigneFacture> getDetailsFacture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDetailsFacture'");
+        return this.lignesFacture.iterator();
     }
 
     @Override
     public Iterator<Paiement> getPaiements() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPaiements'");
+        return this.paiements.iterator();
     }
 
     @Override
     public void setReductionGlobale(float reductionGlobale) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setReductionGlobale'");
+        this.reductionGlobale = reductionGlobale;
     }
 
     @Override
     public float getReductionGlobale() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReductionGlobale'");
+        return this.reductionGlobale;
     }
 
     @Override
-    public void setReductionSurProduit(Produit produit, float reductionProduit) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setReductionSurProduit'");
+    public void setReductionSurProduit(Produit produit, float reductionProduit){
+        // on vérifie que le pourcentage de réduction n'est pas zéro 
+        // si oui, on calcule nouveau prix sinon on retourne le prix précédent 
+        float prixReduit = reductionProduit != 0 ? produit.getPrixUnitaire() * 
+        (1 - (reductionProduit / 100)) : produit.getPrixUnitaire();
+    
+        produit.setPrixUnitaire(prixReduit);
     }
+    
 
     @Override
     public float getReductionSurProduit(Produit produit) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReductionSurProduit'");
+        return produit.getPrixUnitaire();
     }
 
     @Override
-    public float getTotalPaiements() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTotalPaiements'");
+    public float getTotalPaiements(){
+        float totalPaiements = 0.0f;
+        // on ajoute le montant de chaque record de paiement
+        for (Paiement paiement : paiements) {
+            totalPaiements += paiement.getMontant();
+        }
+        return totalPaiements;
     }
     
 }

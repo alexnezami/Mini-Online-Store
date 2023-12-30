@@ -6,30 +6,39 @@ import domain.Client;
 import domain.Facture;
 import domain.Paiement;
 
-public class PaiementImpl implements Paiement{
+public class PaiementImpl implements Paiement {
+
+    private Calendar datePaiement;
+    private Client payeur;
+    private Facture facture;
+    private float montant;
+    
+    public PaiementImpl(Calendar datePaiement, Client payeur, Facture facture, float montant) {
+        this.datePaiement = datePaiement;
+        this.payeur = payeur;
+        this.facture = facture;
+        this.montant = montant;
+    }
+
+      @Override
+    public Calendar getDatePaiement() {
+        return this.datePaiement;
+    }
 
     @Override
     public Client getPayeur() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPayeur'");
+        return this.payeur;
     }
 
     @Override
     public Facture getFacture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFacture'");
+        return this.facture;
     }
 
     @Override
     public float getMontant() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMontant'");
+        return this.montant;
     }
 
-    @Override
-    public Calendar getDatePaiement() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDatePaiement'");
-    }
-    
+  
 }

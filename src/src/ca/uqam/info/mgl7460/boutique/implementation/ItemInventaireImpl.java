@@ -6,28 +6,33 @@ import domain.Produit;
 
 public class ItemInventaireImpl implements ItemInventaire {
 
+    private Produit produit;
+    private String numeroInventaire;
+    private Condition condition;
+
+    public ItemInventaireImpl(Produit produit, String numeroInventaire, Condition condition) {
+        this.produit = produit;
+        this.numeroInventaire = numeroInventaire;
+        this.condition = condition;
+    }
+
     @Override
     public Produit getProduit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProduit'");
+        return this.produit;
     }
 
     @Override
     public String getNumeroInventaire() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNumeroInventaire'");
+        return this.numeroInventaire;
     }
 
     @Override
     public Condition getCondition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCondition'");
+        return this.condition;
     }
 
     @Override
     public void setCondition(Condition cond) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCondition'");
+        this.condition = cond;
     }
-    
 }

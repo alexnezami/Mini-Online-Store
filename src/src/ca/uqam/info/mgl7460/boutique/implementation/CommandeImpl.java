@@ -7,6 +7,7 @@ import java.util.List;
 import domain.Adresse;
 import domain.Client;
 import domain.Commande;
+import domain.FabriqueBoutique;
 import domain.Facture;
 import domain.LigneCommande;
 import domain.Livraison;
@@ -21,9 +22,10 @@ public class CommandeImpl implements Commande {
     private Calendar dateCommande;
     private String numeroCommande;
     private Adresse adresseDeLivraison;
-    private List<LigneCommande> lignesCommandes = new ArrayList<>();
-    private List<Livraison> livraisons = new ArrayList<>();
+    private List<LigneCommande> lignesCommandes;
+    private List<Livraison> livraisons;
     private Facture facture;
+    private FabriqueBoutique fabriqueBoutique;
 
     public CommandeImpl(Client client, Calendar dateCommande, String numeroCommande) {
         this.client = client;
@@ -32,6 +34,7 @@ public class CommandeImpl implements Commande {
         this.adresseDeLivraison = client.getAdresse();
         this.lignesCommandes = new ArrayList<>();
         this.livraisons = new ArrayList<>();
+        this.facture = null;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class CommandeImpl implements Commande {
 
     @Override
     public void ajouteLigneCommande(Produit produit, int quantite) {
-        lignesCommandes.add(new LigneCommandeImpl(produit, quantite));
+        lignesCommandes.add(new LigneCommandeImpl(produit, quantite, 0.0f));
     }
 
     @Override
@@ -88,18 +91,17 @@ public class CommandeImpl implements Commande {
 
     @Override
     public Livraison creerLivraison() {
-        Livraison nouvelleLivraison = new LivraisonImpl(this);
+        Livraison nouvelleLivraison = new LivraisonImpl(dateCommande,this,adresseDeLivraison);
         livraisons.add(nouvelleLivraison);
         return nouvelleLivraison;
     }
 
     @Override
-    public Facture creerFacture() {
-        if (this.facture == null) {
-            this.facture = new FactureImpl(this);
-        }
-        return this.facture;
-    }
+    public Facture creerFacture() { 
+    this.facture = fabriqueBoutique.creerFacture(this);
+    return this.facture;
+}
+
 
     @Override
     public Facture getFacture() {
@@ -108,8 +110,8 @@ public class CommandeImpl implements Commande {
 
     @Override
     public void initialiserAvecPanier(Panier panier) {
-        // avec iterateur on pracourie dans LigneCommande et quand on trouve un objet
-        // on l'ajoute au panier du client 
+        // avec iterateur on pracourie dans LigneCommande et
+        // quand on trouve un objet,on l'ajoute au panier du client 
         Iterator<LigneCommande> panierIterator = panier.getLignesCommande();
         while (panierIterator.hasNext()) {
             LigneCommande lignePanier = panierIterator.next();

@@ -7,6 +7,7 @@ import java.util.List;
 import domain.Adresse;
 import domain.Client;
 import domain.Commande;
+import domain.FabriqueBoutique;
 import domain.Paiement;
 import domain.Panier;
 
@@ -17,6 +18,7 @@ public class ClientImpl implements Client {
     private Panier panier;
     private List<Commande> commandes;
     private List<Paiement> paiements;
+    private FabriqueBoutique fabriqueBoutique;
 
     public ClientImpl(Identification identification, Adresse adresse) {
         this.identification = identification;
@@ -28,12 +30,12 @@ public class ClientImpl implements Client {
 
     @Override
     public Identification getIdentification() {
-        return identification;
+        return this.identification;
     }
 
     @Override
     public Adresse getAdresse() {
-        return adresse;
+        return this.adresse;
     }
     
     @Override
@@ -43,10 +45,8 @@ public class ClientImpl implements Client {
     
     @Override
     public Panier creerPanier() {
-        if (this.panier == null) {
-            this.panier = new PanierImpl();
-        }
-        return panier;
+        this.panier = fabriqueBoutique.creerPanierPourClient(this);
+        return this.panier;
     }
 
     @Override
@@ -56,27 +56,27 @@ public class ClientImpl implements Client {
 
     @Override
     public void ajouterCommande(Commande commande) {
-        commandes.add(commande);
+        this.commandes.add(commande);
     }
 
     @Override
     public void retirerCommande(Commande commande) {
-        commandes.remove(commande);
+        this.commandes.remove(commande);
     }
 
     @Override
     public Iterator<Commande> getCommandes() {
-        return commandes.iterator();
+        return this.commandes.iterator();
     }
 
     @Override
     public Iterator<Paiement> getPaiements() {
-        return paiements.iterator();
+        return this.paiements.iterator();
     }
 
     @Override
     public void ajouterPaiement(Paiement paiement) {
-        paiements.add(paiement);
+        this.paiements.add(paiement);
     }
 
     @Override
