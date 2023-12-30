@@ -1,4 +1,4 @@
-package ca.uqam.info.mgl7460.boutique.domain;
+package boutique.domain;
 
 import java.util.Calendar;
 import java.util.Iterator;
