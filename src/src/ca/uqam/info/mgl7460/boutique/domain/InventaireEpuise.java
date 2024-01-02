@@ -7,15 +7,15 @@ public class InventaireEpuise extends Exception {
     private String message;
 
     public InventaireEpuise(Produit prod, String mess) {
-        produit = prod;
-        message = mess;
+        this.produit = prod;
+        this.message = mess;
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public Produit geProduit() {
-        return produit;
+        return this.produit;
     }
 }
