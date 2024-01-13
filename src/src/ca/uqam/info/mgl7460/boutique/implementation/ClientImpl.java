@@ -20,9 +20,9 @@ public class ClientImpl implements Client {
     private List<Paiement> paiements;
     private FabriqueBoutique fabriqueBoutique;
 
-    public ClientImpl(Identification identification, Adresse adresse) {
+    public ClientImpl(Identification identification) {
         this.identification = identification;
-        this.adresse = adresse;
+        this.adresse = null;
         this.panier = null;
         this.commandes = new ArrayList<>();
         this.paiements = new ArrayList<>();
