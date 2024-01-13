@@ -110,4 +110,6 @@ public class FabriqueBoutiqueImpl implements FabriqueBoutique{
         return new LigneCommandeImpl(produit, quantite, produit.getPrixUnitaire());
     }
     
+    public FabriqueBoutiqueImpl() {
+    }
 }
