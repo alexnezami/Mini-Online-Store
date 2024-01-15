@@ -1,6 +1,11 @@
 package test;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -13,6 +18,8 @@ import domain.FabriqueBoutique;
 import domain.Province;
 import domain.Salutation;
 import implementation.FabriqueBoutiqueImpl;
+import domain.Commande;
+
 
 
 public class ClientTest {
@@ -20,15 +27,19 @@ public class ClientTest {
     FabriqueBoutique fabriqueBoutique;
     Client clientMasculin;
     Client clientFeminin;
+    Commande commandClient;
 
     
     @BeforeEach
     public void setUp(){
         fabriqueBoutique = new FabriqueBoutiqueImpl();
+        
         clientMasculin = fabriqueBoutique.creerClient("Alireza", "Nezami",
         Salutation.MONSIEUR);
         clientFeminin = fabriqueBoutique.creerClient("Shadi", "Darkateh",
         Salutation.MADAME);
+
+        commandClient = fabriqueBoutique.creerCommande(clientMasculin);
     }
     
     @Test
@@ -78,15 +89,39 @@ public class ClientTest {
         clientMasculin.creerPanier();
         clientFeminin.creerPanier();
 
-        assertNotEquals(clientMasculin.getPanier(),
+        assertNotNull(clientMasculin.getPanier(),
         "il n'exist pas de panier");
-        assertNotEquals(clientFeminin.getPanier(),
+        assertNotNull(clientFeminin.getPanier(),
         "il n'exist pas de panier");
     }
     
+    @Test
+    public void testajouterCommande(){
+        clientMasculin.ajouterCommande(commandClient);
+        assertEquals(1, Arrays.asList(clientMasculin.getCommandes()).size(),
+        "il n'existe pas commande dans la liste");
 
+        clientFeminin.ajouterCommande(commandClient);
+        assertEquals(1, Arrays.asList(clientFeminin.getCommandes()).size(),
+        "il n'existe pas commande dans la liste");
+    }
 
+    @Test
+    public void testretirerCommande(){
+        clientMasculin.ajouterCommande(commandClient);
+        clientMasculin.retirerCommande(commandClient);
 
+        assertEquals(1, Arrays.asList(clientMasculin.getCommandes()).size(),
+        "le commande est encore dans la liste");
 
+    }
+
+    @Test
+    public void testgetCommandes(){
+        clientMasculin.ajouterCommande(commandClient);
+        assertEquals(2, ((List<Iterator<Commande>>) clientMasculin.getCommandes()).size(),
+        "la liste du client n'est pas correct");
+    }
+     
 
 }

@@ -45,6 +45,7 @@ public class ClientImpl implements Client {
     
     @Override
     public Panier creerPanier() {
+        fabriqueBoutique = new FabriqueBoutiqueImpl();
         this.panier = fabriqueBoutique.creerPanierPourClient(this);
         return this.panier;
     }
