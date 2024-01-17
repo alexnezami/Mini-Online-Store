@@ -67,7 +67,7 @@ public class ClientImpl implements Client {
 
     @Override
     public Iterator<Commande> getCommandes() {
-        return this.commandes.iterator();
+        return this.commandes.listIterator();
     }
 
     @Override

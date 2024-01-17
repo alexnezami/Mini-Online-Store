@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import domain.Adresse;
@@ -28,6 +30,7 @@ public class ClientTest {
     Client clientMasculin;
     Client clientFeminin;
     Commande commandClient;
+    Commande commandClient2;
 
     
     @BeforeEach
@@ -40,6 +43,16 @@ public class ClientTest {
         Salutation.MADAME);
 
         commandClient = fabriqueBoutique.creerCommande(clientMasculin);
+        commandClient2 = fabriqueBoutique.creerCommande(clientMasculin);
+    }
+
+    @AfterEach
+    public void tearDown(){
+        clientMasculin = null;
+        clientFeminin = null;
+        commandClient = null;
+        commandClient2 = null;
+        fabriqueBoutique = null;
     }
     
     @Test
@@ -119,9 +132,23 @@ public class ClientTest {
     @Test
     public void testgetCommandes(){
         clientMasculin.ajouterCommande(commandClient);
-        assertEquals(2, ((List<Iterator<Commande>>) clientMasculin.getCommandes()).size(),
+        clientMasculin.ajouterCommande(commandClient2);
+
+        assertNotNull(clientMasculin.getCommandes(),
+        "le client n'a rien de commande");
+        
+        List<Commande> commandesList = new ArrayList<>();
+        Iterator<Commande> commandesIterator = clientMasculin.getCommandes();
+        while(commandesIterator.hasNext()){
+            commandesList.add(commandesIterator.next());
+        }
+        
+        assertEquals(2, commandesList.size(),
         "la liste du client n'est pas correct");
     }
+
+
+
      
 
 }
