@@ -17,6 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import domain.Adresse;
 import domain.Client;
 import domain.FabriqueBoutique;
+import domain.Facture;
+import domain.Paiement;
 import domain.Province;
 import domain.Salutation;
 import implementation.FabriqueBoutiqueImpl;
@@ -146,6 +148,53 @@ public class ClientTest {
         assertEquals(2, commandesList.size(),
         "la liste du client n'est pas correct");
     }
+
+    @Test
+    public void testgetpaiements(){
+        Facture facture = fabriqueBoutique.creerFacture(commandClient);
+        Paiement paiement = fabriqueBoutique.creerPaiement(facture, clientMasculin, facture.getMontant());
+        clientMasculin.ajouterPaiement(paiement);
+
+        assertNotNull(clientMasculin.getPaiements(),
+        "il n'a pas de liste de paiement");
+
+        assertEquals(1, Arrays.asList(clientMasculin.getPaiements()).size(),
+        "list de paiement n'est pas correct");
+    }
+
+    @Test
+    public void testajouterPaiement(){
+        Client client = fabriqueBoutique.creerClient("Alireza", "Nezami", Salutation.MONSIEUR);
+
+        Paiement paiement = fabriqueBoutique.creerPaiement(null, client, 0);
+        client.ajouterCommande(commandClient);
+        client.ajouterPaiement(paiement);
+
+        List <Paiement> paiementsList = new ArrayList<>();
+        Iterator<Paiement> paiementsIterator = client.getPaiements();
+        while (paiementsIterator.hasNext()) {
+            paiementsList.add(paiementsIterator.next());
+        }
+        assertEquals(1,paiementsList.size(),"il n'y a pas de liste de paiement");
+    }
+
+    @Test
+    public void testGetPaiementsPourCommande() {
+        Client client = fabriqueBoutique.creerClient("Alireza", "Nezami", Salutation.MONSIEUR);
+        Paiement paiement =fabriqueBoutique.creerPaiement(null, client, 0);
+
+        client.ajouterCommande(commandClient);
+        client.ajouterPaiement(paiement);
+
+        List<Paiement> paiementsList = new ArrayList<>();
+        Iterator<Paiement> paiementsIterator = client.getPaiements();
+        while (paiementsIterator.hasNext()) {
+            paiementsList.add(paiementsIterator.next());            
+        }
+        assertEquals(1, paiementsList.size(), 
+        "il n'y a aucun paiement dans la liste");
+    }
+    
 
 
 
