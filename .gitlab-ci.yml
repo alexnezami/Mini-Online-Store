@@ -1,0 +1,11 @@
+image: openjdk:21.0.1
+
+stages:
+  -build
+  -test
+  -deploy
+
+build:
+  stage: build
+  script:
+    -javac -d src/ca/uqam/info/mgl7460/boutique/bin
