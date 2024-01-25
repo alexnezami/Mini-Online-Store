@@ -13,10 +13,10 @@ build:
 test:
   stage: test
   script:
-    - echo "test"
+    - java  -cp src/src/ca/uqam/info/mgl7460/boutique/bin/ --scan-class-path
 
 
 deploy:
   stage: deploy
   script:
-    -echo "test1"
+    - echo "test1"
