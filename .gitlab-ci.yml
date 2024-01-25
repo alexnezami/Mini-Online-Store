@@ -13,7 +13,7 @@ build:
 test:
   stage: test
   script:
-    java -cp lib/bin:lib/junit-platform-console-standalone-1.10.0.jar org.junit.platform.console.ConsoleLauncher --scan-class-path
+    java -cp lib/bin:lib/junit-platform-console-standalone-1.10.1 org.junit.platform.console.ConsoleLauncher --scan-class-path
 
 
 
