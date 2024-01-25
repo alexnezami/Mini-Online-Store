@@ -1,4 +1,4 @@
-image: openjdk:21.0.1
+image: openjdk:21
 
 stages:
   - build
