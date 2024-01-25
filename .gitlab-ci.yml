@@ -19,4 +19,4 @@ test:
 deploy:
   stage: deploy
   script:
-    - echo "test1"
+    - echo "test"
