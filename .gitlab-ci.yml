@@ -12,8 +12,11 @@ build:
 
 test:
   stage: test
+  script:
     - echo "test"
+
 
 deploy:
   stage: deploy
+  script:
     -echo "test"
