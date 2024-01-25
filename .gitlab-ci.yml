@@ -8,7 +8,7 @@ stages:
 build:
   stage: build
   script:
-    -javac -d src/ca/uqam/info/mgl7460/boutique/bin
+    -javac -d src/src/ca/uqam/info/mgl7460/boutique/bin src/src/ca/uqam/info/mgl7460/boutique/outils/*.java
 
 test:
   stage: test
