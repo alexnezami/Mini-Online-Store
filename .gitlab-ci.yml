@@ -13,7 +13,7 @@ build:
 test:
   stage: test
   script:
-    java -cp src/src/ca/uqam/info/mgl7460/boutique/bin:lib/* org.junit.runner.JUnitCore [ClientTest.java]
+    java -cp src/src/ca/uqam/info/mgl7460/boutique/bin:lib/* org.junit.runner.JUnitCore ClientTest
 
 
 deploy:
