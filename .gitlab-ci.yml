@@ -13,7 +13,8 @@ build:
 test:
   stage: test
   script:
-    - java lib/junit-platform-console-standalone-1.10.1.jar org.junit.platform.console.ConsoleLauncher -cp src/src/ca/uqam/info/mgl7460/boutique/bin/ --scan-class-path
+    - java -jar lib/junit-platform-console-standalone-1.10.1.jar --class-path "src/src/ca/uqam/info/mgl7460/boutique/bin/" --scan-class-path
+
 
 
 
