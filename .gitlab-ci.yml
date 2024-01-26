@@ -8,7 +8,7 @@ stages:
 build:
   stage: build
   script:
-    - javac -d src/src/ca/uqam/info/mgl7460/boutique/bin src/src/ca/uqam/info/mgl7460/boutique/domain/*.java src/src/ca/uqam/info/mgl7460/boutique/implementation/*.java
+    - javac -d src/src/ca/uqam/info/mgl7460/boutique/bin -cp lib/junit-platform-console-standalone-1.10.0.jar src/src/ca/uqam/info/mgl7460/boutique/domain/*.java src/src/ca/uqam/info/mgl7460/boutique/implementation/*.java src/src/ca/uqam/info/mgl7460/boutique/test/*.java src/src/ca/uqam/info/mgl7460/boutique/MainClass.java
 
 test:
   stage: test
