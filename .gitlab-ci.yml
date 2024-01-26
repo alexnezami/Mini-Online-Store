@@ -21,4 +21,4 @@ test:
 deploy:
   stage: deploy
   script:
-    - echo "Coming Soon!!!!!!. finalement j'ai fait pipeline :-)  😍😍😍😍"
+    - echo "Coming Soon!!!!!. finalement j'ai fait pipeline :-)  😍😍😍😍"
