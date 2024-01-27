@@ -58,7 +58,7 @@ public class ClientTests {
     }
     
     @Test
-    public void testgetIdentification(){
+    public void getIdentificationTest(){
 
         assertEquals(Salutation.MONSIEUR, clientMasculin.getIdentification().salutation(),
         "Le sexe du client n'est pas correct");
@@ -77,7 +77,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testgetAdresse(){
+    public void getAdresseTest(){
         clientMasculin.setAdresse(new Adresse("01", "600", "Verdun",
          "Montreal", "H3E 2N4", Province.QUEBEC));
 
@@ -99,7 +99,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testcreerPanier(){
+    public void creerPanierTest(){
 
         clientMasculin.creerPanier();
         clientFeminin.creerPanier();
@@ -111,7 +111,7 @@ public class ClientTests {
     }
     
     @Test
-    public void testajouterCommande(){
+    public void ajouterCommandeTest(){
         clientMasculin.ajouterCommande(commandClient);
         assertEquals(1, Arrays.asList(clientMasculin.getCommandes()).size(),
         "il n'existe pas commande dans la liste");
@@ -122,7 +122,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testretirerCommande(){
+    public void retirerCommandeTest(){
         clientMasculin.ajouterCommande(commandClient);
         clientMasculin.retirerCommande(commandClient);
 
@@ -132,7 +132,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testgetCommandes(){
+    public void getCommandesTest(){
         clientMasculin.ajouterCommande(commandClient);
         clientMasculin.ajouterCommande(commandClient2);
 
@@ -150,7 +150,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testgetpaiements(){
+    public void getpaiementsTest(){
         Facture facture = fabriqueBoutique.creerFacture(commandClient);
         Paiement paiement = fabriqueBoutique.creerPaiement(facture, clientMasculin, facture.getMontant());
         clientMasculin.ajouterPaiement(paiement);
@@ -163,7 +163,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testajouterPaiement(){
+    public void ajouterPaiementTest(){
         Client client = fabriqueBoutique.creerClient("Alireza", "Nezami", Salutation.MONSIEUR);
 
         Paiement paiement = fabriqueBoutique.creerPaiement(null, client, 0);
@@ -179,7 +179,7 @@ public class ClientTests {
     }
 
     @Test
-    public void testGetPaiementsPourCommande() {
+    public void getPaiementsPourCommandeTest() {
         Client client = fabriqueBoutique.creerClient("Alireza", "Nezami", Salutation.MONSIEUR);
         Paiement paiement =fabriqueBoutique.creerPaiement(null, client, 0);
 
