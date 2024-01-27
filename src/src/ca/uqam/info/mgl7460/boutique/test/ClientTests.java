@@ -26,7 +26,7 @@ import domain.Commande;
 
 
 
-public class ClientTest {
+public class ClientTests {
 
     FabriqueBoutique fabriqueBoutique;
     Client clientMasculin;
