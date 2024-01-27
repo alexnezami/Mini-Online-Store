@@ -13,7 +13,7 @@ build:
 test:
   stage: test
   script:
-    - java -jar lib/junit-platform-console-standalone-1.10.0.jar execute --class-path src/src/ca/uqam/info/mgl7460/boutique/bin/ --select-class ca.uqam.info.mgl7460.boutique.test.ClientTest
+    - java -jar lib/junit-platform-console-standalone-1.10.0.jar execute --class-path src/src/ca/uqam/info/mgl7460/boutique/bin/ -c test
 
 
     - echo "java -jar lib/junit-platform-console-standalone-1.10.0.jar execute --class-path "src/src/ca/uqam/info/mgl7460/boutique/bin/" --scan-class-path"
