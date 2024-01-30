@@ -39,7 +39,7 @@ public class FactureImpl implements Facture {
 
     @Override
     public Commande getCommande() {
-        return commande;
+        return this.commande;
     }
 
     @Override

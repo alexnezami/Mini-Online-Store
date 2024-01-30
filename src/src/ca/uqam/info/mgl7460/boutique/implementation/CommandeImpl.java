@@ -110,7 +110,7 @@ public class CommandeImpl implements Commande {
 
     @Override
     public void initialiserAvecPanier(Panier panier) {
-        // avec iterateur on pracourie dans LigneCommande et
+        // avec iterateur on parcourie dans LigneCommande et
         // quand on trouve un objet,on l'ajoute au panier du client 
         Iterator<LigneCommande> panierIterator = panier.getLignesCommande();
         while (panierIterator.hasNext()) {

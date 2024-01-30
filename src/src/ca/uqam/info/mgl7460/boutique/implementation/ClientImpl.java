@@ -26,6 +26,7 @@ public class ClientImpl implements Client {
         this.panier = null;
         this.commandes = new ArrayList<>();
         this.paiements = new ArrayList<>();
+        this.fabriqueBoutique = null;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ClientImpl implements Client {
 
     @Override
     public Iterator<Paiement> getPaiements() {
-        return this.paiements.iterator();
+        return this.paiements.listIterator();
     }
 
     @Override
